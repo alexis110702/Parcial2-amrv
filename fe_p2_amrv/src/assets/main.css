@@ -1,0 +1,46 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+
+.contenedor {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+.tabla-scroll {
+  overflow-x: auto;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.campo .p-inputtext,
+.campo .p-select,
+.campo .p-inputnumber {
+  width: 100%;
+}
+
+.botones-dialogo {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
