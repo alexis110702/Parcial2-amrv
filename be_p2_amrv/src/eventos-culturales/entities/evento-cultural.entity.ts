@@ -16,6 +16,12 @@ export enum EstadoEvento {
   AGOTADO = 'Agotado',
   CANCELADO = 'Cancelado',
 }
+//Campo para agregar los nombres, si queremos cambiar aqui el com saldran en el frontend//
+export enum ModalidadIngreso {
+  ENTRADA_PAGADA = 'Entrada Pagada',
+  ENTRADA_GRATUITA = 'Entrada gratuita',
+  PASE_INVITACION = 'Pase invitación',
+}
 
 @Entity('eventos_culturales')
 @Check('chk_eventos_culturales_estado', `estado IN ('Programado', 'Agotado', 'Cancelado')`)
@@ -51,6 +57,10 @@ export class EventoCultural {
 
   @Column('varchar', { length: 20, default: EstadoEvento.PROGRAMADO })
   estado: EstadoEvento;
+
+// modalidad de ingreso por default, nuevo campo en nuestra base de datos //
+  @Column('varchar', { name: 'modalidad_ingreso', length: 20, default: ModalidadIngreso.ENTRADA_PAGADA }) 
+  modalidadIngreso: ModalidadIngreso;
 
   @CreateDateColumn({ name: 'fecha_creacion' })
   fechaCreacion: Date;

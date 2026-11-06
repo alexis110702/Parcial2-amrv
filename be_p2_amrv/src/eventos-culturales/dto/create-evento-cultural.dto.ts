@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
+
 import {
   IsDateString,
   IsDefined,
@@ -11,7 +12,8 @@ import {
   MaxLength,
   Min,
 } from 'class-validator';
-import { EstadoEvento } from '../entities/evento-cultural.entity';
+// cambiamos el import y agregamos lo nuevo que tenemos en entity.ts//
+import { EstadoEvento, ModalidadIngreso } from '../entities/evento-cultural.entity';
 
 export class CreateEventoCulturalDto {
   @ApiProperty()
@@ -57,4 +59,11 @@ export class CreateEventoCulturalDto {
   @IsDefined({ message: 'El estado es obligatorio' })
   @IsEnum(EstadoEvento, { message: 'El estado debe ser: Programado, Agotado o Cancelado' })
   readonly estado: EstadoEvento;
+
+  // agregamos una nueva validaccion de entrada //
+  @ApiProperty({ enum: ModalidadIngreso, example: ModalidadIngreso.ENTRADA_PAGADA })
+  @IsDefined({ message: 'La modalidad de ingreso es obligatoria' })
+  @IsEnum(ModalidadIngreso, { message: 'La modalidad debe ser: Entrada pagada, Entrada gratuita o Pase invitación',
+  })
+  readonly modalidadIngreso: ModalidadIngreso;
 }

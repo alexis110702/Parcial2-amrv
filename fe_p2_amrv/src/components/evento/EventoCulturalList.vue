@@ -73,6 +73,7 @@ defineExpose({ obtenerLista })
             <th>Duración</th>
             <th>Precio (Bs.)</th>
             <th>Estado</th>
+            <th>Modalidad de ingreso</th>
             <th>Acciones</th>
           </tr>
         </thead>
@@ -91,6 +92,7 @@ defineExpose({ obtenerLista })
             <td>{{ evento.duracionMinutos }} min</td>
             <td>{{ Number(evento.precioEntrada).toFixed(2) }}</td>
             <td>{{ evento.estado }}</td>
+            <td>{{ evento.modalidadIngreso }}</td>
             <td style="white-space: nowrap">
               <Button icon="pi pi-pencil" aria-label="Editar" text @click="emitirEdicion(evento)" />
               <Button

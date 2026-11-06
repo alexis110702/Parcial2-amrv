@@ -2,7 +2,7 @@
 import { computed, ref, watch } from 'vue'
 import http from '@/plugins/axios'
 import { Button, Dialog, InputNumber, InputText, Select } from 'primevue'
-import { ESTADOS_EVENTO, type EventoCultural } from '@/models/eventoCultural'
+import { ESTADOS_EVENTO, MODALIDADES_INGRESO, type EventoCultural } from '@/models/eventoCultural'
 import type { Recinto } from '@/models/recinto'
 
 const ENDPOINT = 'eventos-culturales'
@@ -18,6 +18,7 @@ const emit = defineEmits(['guardar', 'close'])
 const evento = ref<EventoCultural>({ ...props.evento })
 const recintos = ref<Recinto[]>([])
 const estados = ESTADOS_EVENTO
+const modalidades = MODALIDADES_INGRESO
 
 const dialogVisible = computed({
   get: () => props.mostrar,
@@ -42,7 +43,7 @@ watch(
           fechaEvento: props.evento.fechaEvento.substring(0, 10),
         }
       } else {
-        evento.value = { estado: 'Programado' } as EventoCultural
+          evento.value = { estado: 'Programado', modalidadIngreso: 'Entrada Pagada',} as EventoCultural
       }
     }
   },
@@ -58,6 +59,7 @@ async function handleSave() {
       precioEntrada: evento.value.precioEntrada,
       fechaEvento: evento.value.fechaEvento,
       estado: evento.value.estado,
+      modalidadIngreso: evento.value.modalidadIngreso,
     }
     if (props.modoEdicion) {
       await http.patch(`${ENDPOINT}/${evento.value.id}`, body)
@@ -139,6 +141,15 @@ async function handleSave() {
           :maxFractionDigits="2"
         />
       </div>
+    </div>
+    <div class="campo">
+      <label for="modalidadIngreso">Modalidad de ingreso</label>
+      <Select
+        id="modalidadIngreso"
+        v-model="evento.modalidadIngreso"
+        :options="modalidades"
+        placeholder="Seleccione la modalidad"
+      />
     </div>
     <div class="botones-dialogo">
       <Button

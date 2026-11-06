@@ -47,6 +47,7 @@ export class EventosCulturalesService {
         'eventos.precioEntrada',
         'eventos.fechaEvento',
         'eventos.estado',
+        'eventos.modalidadIngreso', // se carga el nuevo campo 
         'recinto.id',
         'recinto.nombre',
         'recinto.ciudad',
